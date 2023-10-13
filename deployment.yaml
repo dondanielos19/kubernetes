@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: dondanielos19/aplikacja:app
+        ports:
+        - containerPort: 5000
+        env:
+        - name: BG_COLOR
+          valueFrom:
+            configMapKeyRef:
+              name: my-configmap
+              key: BG_COLOR
+        - name: SECRET_USER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: my-secret
+              key: SECRET_USER_PASSWORD
+

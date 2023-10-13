@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  selector:
+    app: app
+  ports:
+    - protocol: TCP
+      port: 5000  # Port na węźle
+      targetPort: 5000  # Port Twojej aplikacji w klastrze
+  type: NodePort
+
